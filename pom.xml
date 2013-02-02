@@ -10,7 +10,7 @@
 	<artifactId>rpm-parent</artifactId>
 	<version>1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Server for metering</name>
+	<name>Parent POM for RPM packaging</name>
 	<organization>
 		<name>Taimos GmbH</name>
 		<url>http://www.taimos.de</url>
