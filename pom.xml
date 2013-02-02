@@ -1,0 +1,110 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.taimos</groupId>
+	<artifactId>rpm-parent</artifactId>
+	<version>1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Server for metering</name>
+	<organization>
+		<name>Taimos GmbH</name>
+		<url>http://www.taimos.de</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>thoeger</id>
+			<email>thorsten.hoeger@taimos.de</email>
+			<name>Thorsten Hoeger</name>
+			<organization>Taimos GmbH</organization>
+			<organizationUrl>http://www.taimos.de</organizationUrl>
+			<timezone>+1</timezone>
+		</developer>
+	</developers>
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<scm>
+		<connection>scm:git:git@github.com:taimos/rpm-parent.git</connection>
+		<developerConnection>scm:git:git@github.com:taimos/rpm-parent.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>github</system>
+		<url>https://github.com/taimos/rpm-parent/issues</url>
+	</issueManagement>
+	<prerequisites>
+		<maven>3.0.0</maven>
+	</prerequisites>
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>rpm-maven-plugin</artifactId>
+					<version>2.1-alpha-2</version>
+					<executions>
+						<execution>
+							<phase>verify</phase>
+							<goals>
+								<goal>rpm</goal>
+							</goals>
+						</execution>
+					</executions>
+					<configuration>
+						<packager>Taimos GmbH</packager>
+						<copyright>2013, Taimos GmbH</copyright>
+						<group>Applications/System</group>
+						<prefix>/</prefix>
+						<changelogFile>package/changelog</changelogFile>
+						<packager>Thorsten Hoeger</packager>
+						<mappings>
+						</mappings>
+						<preinstallScriptlet>
+							<scriptFile>package/pre</scriptFile>
+							<fileEncoding>utf-8</fileEncoding>
+						</preinstallScriptlet>
+						<postinstallScriptlet>
+							<scriptFile>package/post</scriptFile>
+							<fileEncoding>utf-8</fileEncoding>
+						</postinstallScriptlet>
+						<preremoveScriptlet>
+							<scriptFile>package/preun</scriptFile>
+							<fileEncoding>utf-8</fileEncoding>
+						</preremoveScriptlet>
+						<postremoveScriptlet>
+							<scriptFile>package/postun</scriptFile>
+							<fileEncoding>utf-8</fileEncoding>
+						</postremoveScriptlet>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<scmCommentPrefix>[maven-release-plugin ${project.artifactId}]</scmCommentPrefix>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
